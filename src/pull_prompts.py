@@ -20,7 +20,22 @@ load_dotenv()
 
 
 def pull_prompts_from_langsmith():
-    ...
+    """
+    Faz download do prompt v1 do LangSmith Hub.
+
+    Returns:
+        ChatPromptTemplate baixado ou None em caso de falha.
+    """
+    prompt_name = "leonanluppi/bug_to_user_story_v1"
+    print(f"Baixando prompt do LangSmith Hub: {prompt_name}...")
+
+    try:
+        prompt = hub.pull(prompt_name)
+        print(f"✓ Prompt '{prompt_name}' baixado com sucesso!")
+        return prompt
+    except Exception as e:
+        print(f"❌ Erro ao baixar prompt '{prompt_name}': {e}")
+        return None
 
 
 def main():
