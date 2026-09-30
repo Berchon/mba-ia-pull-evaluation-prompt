@@ -25,7 +25,12 @@ def pull_prompts_from_langsmith():
 
 def main():
     """Função principal"""
-    ...
+    print_section_header("PULL DE PROMPTS DO LANGSMITH HUB")
+
+    if not check_env_vars(["LANGSMITH_API_KEY"]):
+        return 1
+
+    return 0
 
 
 if __name__ == "__main__":
