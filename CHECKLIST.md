@@ -49,8 +49,8 @@
 - [x] **Subtask 2.1.1:** Validar variáveis de ambiente obrigatórias com `check_env_vars(["LANGSMITH_API_KEY"])`.
 - [x] **Subtask 2.1.2:** Implementar `pull_prompts_from_langsmith()` baixando `leonanluppi/bug_to_user_story_v1` via `hub.pull`.
 - [x] **Subtask 2.1.3:** Extrair mensagens e metadados e salvar em `prompts/bug_to_user_story_v1.yml` com `save_yaml()`.
-- [ ] **Subtask 2.1.4:** Implementar função `main()` com logging e tratamento de erros.
-- [ ] *Validação com o usuário realizada antes de cada commit.*
+- [x] **Subtask 2.1.4:** Implementar função `main()` com logging e tratamento de erros.
+- [x] *Validação com o usuário realizada antes de cada commit.*
 - [ ] *Merge da branch `feature/task-2.1-pull-prompts-script` na `main`.*
 
 ### Tarefa 2.2: Execução e Validação do Pull

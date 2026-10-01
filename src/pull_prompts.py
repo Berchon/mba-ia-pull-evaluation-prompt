@@ -115,13 +115,29 @@ def pull_prompts_from_langsmith() -> bool:
 
 
 def main():
-    """Função principal"""
+    """Função principal que orquestra a execução do script."""
     print_section_header("PULL DE PROMPTS DO LANGSMITH HUB")
 
     if not check_env_vars(["LANGSMITH_API_KEY"]):
         return 1
 
-    return 0
+    try:
+        success = pull_prompts_from_langsmith()
+        if success:
+            print("\n" + "=" * 50)
+            print("✅ PULL CONCLUÍDO COM SUCESSO!")
+            print("Prompt salvo em: prompts/bug_to_user_story_v1.yml")
+            print("=" * 50 + "\n")
+            return 0
+        else:
+            print("\n" + "=" * 50)
+            print("❌ FALHA NO PULL DO PROMPT")
+            print("Verifique os logs acima para identificar a causa.")
+            print("=" * 50 + "\n")
+            return 1
+    except Exception as e:
+        print(f"\n❌ Erro inesperado durante a execução: {e}")
+        return 1
 
 
 if __name__ == "__main__":
