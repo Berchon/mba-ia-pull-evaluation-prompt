@@ -58,7 +58,7 @@
 - [x] **Subtask 2.2.1:** Executar `python src/pull_prompts.py`.
 - [x] **Subtask 2.2.2:** Validar o arquivo gerado `prompts/bug_to_user_story_v1.yml`.
 - [x] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-2.2-validate-pull-execution` na `main`.*
+- [x] *Merge da branch `feature/task-2.2-validate-pull-execution` na `main`.*
 
 ---
 
