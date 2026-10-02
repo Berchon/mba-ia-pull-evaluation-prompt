@@ -1,0 +1,16 @@
+bug_to_user_story_v2:
+  description: Prompt otimizado para converter relatos de bugs em User Stories profissionais com critérios BDD e contexto técnico.
+  system_prompt: ""
+  user_prompt: "{bug_report}"
+  techniques_applied:
+    - role-prompting
+    - chain-of-thought
+    - few-shot
+  version: "v2"
+  created_at: '2026-10-02'
+  tags:
+    - bug-analysis
+    - user-story
+    - product-management
+    - bdd
+    - qa

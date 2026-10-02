@@ -66,7 +66,7 @@
 
 ### Tarefa 3.1: Modelagem e Redação de `prompts/bug_to_user_story_v2.yml`
 - **Branch:** `feature/task-3.1-prompt-v2-optimization`
-- [ ] **Subtask 3.1.1:** Estruturar metadados do YAML (`description`, `version: "v2"`, `techniques_applied`, `tags`).
+- [x] **Subtask 3.1.1:** Estruturar metadados do YAML (`description`, `version: "v2"`, `techniques_applied`, `tags`).
 - [ ] **Subtask 3.1.2:** Aplicar técnica **Role Prompting** (Senior Technical Product Manager & QA Lead).
 - [ ] **Subtask 3.1.3:** Aplicar técnica **Chain of Thought (CoT)** passo a passo com estrutura BDD.
 - [ ] **Subtask 3.1.4:** Aplicar técnica **Few-shot Learning (obrigatória)** com 2-3 exemplos completos alinhados ao dataset.
