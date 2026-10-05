@@ -68,7 +68,7 @@
 - **Branch:** `feature/task-3.1-prompt-v2-optimization`
 - [x] **Subtask 3.1.1:** Estruturar metadados do YAML (`description`, `version: "v2"`, `techniques_applied`, `tags`).
 - [x] **Subtask 3.1.2:** Aplicar técnica **Role Prompting** (Senior Technical Product Manager & QA Lead).
-- [ ] **Subtask 3.1.3:** Aplicar técnica **Chain of Thought (CoT)** passo a passo com estrutura BDD.
+- [x] **Subtask 3.1.3:** Aplicar técnica **Chain of Thought (CoT)** passo a passo com estrutura BDD.
 - [ ] **Subtask 3.1.4:** Aplicar técnica **Few-shot Learning (obrigatória)** com 2-3 exemplos completos alinhados ao dataset.
 - [ ] **Subtask 3.1.5:** Validação de regras (Markdown, sem `TODO`, separação limpa System/User Prompt).
 - [ ] *Validação com o usuário realizada antes de cada commit.*
