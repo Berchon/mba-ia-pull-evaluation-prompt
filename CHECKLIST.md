@@ -70,8 +70,8 @@
 - [x] **Subtask 3.1.2:** Aplicar técnica **Role Prompting** (Senior Technical Product Manager & QA Lead).
 - [x] **Subtask 3.1.3:** Aplicar técnica **Chain of Thought (CoT)** passo a passo com estrutura BDD.
 - [x] **Subtask 3.1.4:** Aplicar técnica **Few-shot Learning (obrigatória)** com 2-3 exemplos completos alinhados ao dataset.
-- [ ] **Subtask 3.1.5:** Validação de regras (Markdown, sem `TODO`, separação limpa System/User Prompt).
-- [ ] *Validação com o usuário realizada antes de cada commit.*
+- [x] **Subtask 3.1.5:** Validação de regras (Markdown, sem `TODO`, separação limpa System/User Prompt).
+- [x] *Validação com o usuário realizada antes de cada commit.*
 - [ ] *Merge da branch `feature/task-3.1-prompt-v2-optimization` na `main`.*
 
 ---
