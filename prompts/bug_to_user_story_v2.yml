@@ -65,5 +65,118 @@ bug_to_user_story_v2:
        - Para relatos médios/complexos com detalhes técnicos, adicione seções dedicadas ("Contexto Técnico:", "Critérios de Segurança:", etc.).
        - Inicie a resposta diretamente pela especificação, sem introduções ou saudações.
 
+    # EXEMPLOS DE DEMONSTRAÇÃO (FEW-SHOT LEARNING)
+
+    --- EXEMPLO 1 (SIMPLES: UI / VALIDAÇÃO) ---
+    Entrada:
+    Ao cadastrar um novo endereço de entrega, o campo de CEP aceita letras e caracteres especiais, permitindo salvar dados inválidos.
+
+    Saída:
+    Como um cliente preenchendo meu endereço de entrega, eu quero que o sistema valide o formato do CEP aceitando apenas dígitos numéricos, para que eu não cadastre um endereço incorreto e evite problemas na entrega do pedido.
+
+    Critérios de Aceitação:
+    - Dado que estou no formulário de cadastro de endereço
+    - Quando digito letras ou caracteres especiais no campo de CEP
+    - Então o campo deve bloquear a digitação ou exibir uma mensagem de erro indicando o formato esperado
+    - E não devo conseguir submeter o formulário com o CEP inválido
+    - E a máscara visual (XXXXX-XXX) deve ser aplicada automaticamente
+
+    --- EXEMPLO 2 (MÉDIO: INTEGRAÇÃO / ERRO HTTP / LOGS) ---
+    Entrada:
+    Ao solicitar a emissão de nota fiscal para um pedido faturado, o processo falha intermitentemente e o status não atualiza.
+
+    Passos para reproduzir:
+    1. Acessar tela de faturamento
+    2. Clicar em 'Emitir NF-e' no pedido #9876
+    3. Spinner gira por 60 segundos e exibe alerta de erro
+
+    Logs da aplicação:
+    HTTP 504 Gateway Timeout ao enviar POST para /api/v1/fiscal/invoices/authorize.
+    A API parceira demorou mais de 45 segundos para responder.
+
+    Saída:
+    Como um analista financeiro operando o módulo de faturamento, eu quero que a emissão de nota fiscal eletrônica seja processada de forma resiliente e com feedback claro, para que os pedidos sejam faturados sem bloqueios operacionais causados por instabilidades externas.
+
+    Critérios de Aceitação:
+    - Dado que solicito a emissão de NF-e para um pedido faturado
+    - Quando a requisição para a API de autorização ultrapassar o tempo limite de espera
+    - Então o sistema não deve travar a tela em loading infinito
+    - E deve enfileirar a solicitação para retry assíncrono com backoff exponencial
+    - E o usuário deve receber notificação sobre o processamento em background
+    - E o status do pedido deve mudar para 'aprovado' assim que a resposta for confirmada
+
+    Contexto Técnico:
+    - Causa identificada: Falha de timeout (HTTP 504) na integração síncrona com o serviço fiscal parceiro (>45s)
+    - Ação recomendada: Desacoplar a chamada síncrona implementando fila de mensageria com retry automático
+    - Resiliência: Configurar timeout da requisição HTTP para 15 segundos e expor status para polling/webhook
+
+    --- EXEMPLO 3 (COMPLEXO: MULTI-FALHA / SEGURANÇA E CONCORRÊNCIA) ---
+    Entrada:
+    Múltiplas falhas críticas identificadas no fluxo de agendamento de consultas médicas online.
+
+    PROBLEMAS REPORTADOS:
+    1. CONCORRÊNCIA: Dois pacientes conseguem agendar o mesmo médico no mesmo horário simultaneamente (overbooking por falta de lock atômico no banco).
+    2. SEGURANÇA: Endpoint GET /api/appointments/:id/summary expõe histórico médico e CPF do paciente para qualquer usuário autenticado sem validar autorização.
+    3. UX / TIMEOUT: Quando a confirmação por SMS falha, a tela de agendamento trava e o paciente clica várias vezes, gerando consultas duplicadas.
+
+    IMPACTO:
+    - 40+ reclamações de pacientes com consultas sobrepostas nesta semana.
+    - Risco de conformidade com LGPD por exposição de dados de saúde.
+
+    Saída:
+    Como um paciente utilizando o portal de saúde, eu quero agendar consultas de forma segura, confiável e sem duplicidades, para que meu horário com o especialista seja garantido e minhas informações médicas permaneçam protegidas.
+
+    === USER STORY PRINCIPAL ===
+
+    Título: Agendamento seguro, atômico e resiliente de consultas médicas
+
+    Descrição:
+    Como um paciente do sistema de saúde, eu quero selecionar e confirmar horários de consulta com validação concorrente e proteção rigorosa de dados pessoais, para que meu agendamento seja exclusivo e meu prontuário permaneça restrito apenas a profissionais autorizados.
+
+    === CRITÉRIOS DE ACEITAÇÃO ===
+
+    A. Concorrência - Bloqueio de Overbooking:
+    - Dado que um horário de consulta está disponível para agendamento
+    - Quando dois usuários tentam confirmar o mesmo horário simultaneamente
+    - Então o sistema deve aplicar bloqueio atômico na transação
+    - E deve garantir a confirmação apenas para o primeiro usuário
+    - E deve notificar o segundo usuário informando que o horário acabou de ser reservado
+
+    B. Segurança - Controle de Acesso e Privacidade (LGPD):
+    - Dado que um usuário solicita detalhes de uma consulta em GET /api/appointments/:id/summary
+    - Quando a requisição for processada
+    - Então o sistema deve validar se o usuário é o próprio paciente ou o médico responsável
+    - E se for um usuário não autorizado, deve retornar HTTP 403 Forbidden
+    - E nenhum dado clínico ou CPF deve ser exposto sem a devida autorização
+
+    C. UX e Resiliência - Confirmação Assíncrona:
+    - Dado que o agendamento foi registrado com sucesso
+    - Quando houver lentidão ou falha no serviço externo de envio de SMS
+    - Então a tela deve confirmar o agendamento imediatamente para o paciente
+    - E o envio do SMS deve ser enfileirado para reprocessamento em background
+    - E o botão de confirmação deve ser desabilitado após o primeiro clique para evitar duplicações
+
+    === CRITÉRIOS TÉCNICOS ===
+
+    Banco de Dados e Concorrência:
+    - Implementar transação serializável ou lock pessimista (SELECT FOR UPDATE) no slot de horário
+    - Adicionar restrição de unicidade composta (medico_id, data_hora) na tabela de agendamentos
+
+    Segurança:
+    - Implementar middleware de autorização baseado em política (ABAC/RBAC) no endpoint de resumo
+    - Registrar tentativas de acesso indevido em trilha de auditoria para compliance LGPD
+
+    === CONTEXTO DO BUG ===
+
+    Severidade: CRÍTICA
+    Impacto: Overbooking em 40+ atendimentos e risco regulatório grave de vazamento de dados sensíveis de saúde.
+
+    === TASKS TÉCNICAS SUGERIDAS ===
+
+    1. [BACKEND] Implementar lock atômico na reserva de horários para eliminar race conditions
+    2. [SEGURANÇA] Criar política de autorização e proteção de dados no endpoint de consultas
+    3. [FRONTEND] Implementar proteção contra duplo clique e feedback imediato de confirmação
+    4. [INFRA] Migrar envio de SMS para fila assíncrona desacoplada do fluxo HTTP principal
+
   user_prompt: |
     {bug_report}
