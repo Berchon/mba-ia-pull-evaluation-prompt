@@ -72,7 +72,7 @@
 - [x] **Subtask 3.1.4:** Aplicar técnica **Few-shot Learning (obrigatória)** com 2-3 exemplos completos alinhados ao dataset.
 - [x] **Subtask 3.1.5:** Validação de regras (Markdown, sem `TODO`, separação limpa System/User Prompt).
 - [x] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-3.1-prompt-v2-optimization` na `main`.*
+- [x] *Merge da branch `feature/task-3.1-prompt-v2-optimization` na `main`.*
 
 ---
 
