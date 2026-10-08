@@ -80,14 +80,14 @@
 
 ### Tarefa 4.1: Implementação dos 6 Testes com Pytest
 - **Branch:** `feature/task-4.1-prompt-tests`
-- [ ] **Subtask 4.1.1:** Implementar `test_prompt_has_system_prompt`.
-- [ ] **Subtask 4.1.2:** Implementar `test_prompt_has_role_definition`.
-- [ ] **Subtask 4.1.3:** Implementar `test_prompt_mentions_format`.
-- [ ] **Subtask 4.1.4:** Implementar `test_prompt_has_few_shot_examples`.
-- [ ] **Subtask 4.1.5:** Implementar `test_prompt_no_todos`.
-- [ ] **Subtask 4.1.6:** Implementar `test_minimum_techniques`.
-- [ ] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-4.1-prompt-tests` na `main`.*
+- [x] **Subtask 4.1.1:** Implementar `test_prompt_has_system_prompt`.
+- [x] **Subtask 4.1.2:** Implementar `test_prompt_has_role_definition`.
+- [x] **Subtask 4.1.3:** Implementar `test_prompt_mentions_format`.
+- [x] **Subtask 4.1.4:** Implementar `test_prompt_has_few_shot_examples`.
+- [x] **Subtask 4.1.5:** Implementar `test_prompt_no_todos`.
+- [x] **Subtask 4.1.6:** Implementar `test_minimum_techniques`.
+- [x] *Validação com o usuário realizada antes de cada commit.*
+- [x] *Merge da branch `feature/task-4.1-prompt-tests` na `main`.*
 
 ### Tarefa 4.2: Execução dos Testes Automatizados
 - **Branch:** `feature/task-4.2-run-validation-tests`
