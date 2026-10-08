@@ -97,7 +97,12 @@ class TestPrompts:
 
     def test_minimum_techniques(self):
         """Verifica (através dos metadados do yaml) se pelo menos 2 técnicas foram listadas."""
-        pass
+        techniques = self.prompt_data.get("techniques_applied", [])
+        assert isinstance(techniques, list), "O campo 'techniques_applied' deve ser uma lista"
+        assert len(techniques) >= 2, f"Mínimo de 2 técnicas requeridas, encontradas: {len(techniques)}"
+
+        is_valid, errors = validate_prompt_structure(self.prompt_data)
+        assert is_valid, f"Falha na validação estrutural do prompt: {errors}"
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])
