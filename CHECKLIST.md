@@ -91,10 +91,10 @@
 
 ### Tarefa 4.2: Execução dos Testes Automatizados
 - **Branch:** `feature/task-4.2-run-validation-tests`
-- [ ] **Subtask 4.2.1:** Executar `pytest tests/test_prompts.py -v`.
-- [ ] **Subtask 4.2.2:** Garantir aprovação de 100% dos testes (6 testes passando).
-- [ ] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-4.2-run-validation-tests` na `main`.*
+- [x] **Subtask 4.2.1:** Executar `pytest tests/test_prompts.py -v`.
+- [x] **Subtask 4.2.2:** Garantir aprovação de 100% dos testes (6 testes passando).
+- [x] *Validação com o usuário realizada antes de cada commit.*
+- [x] *Merge da branch `feature/task-4.2-run-validation-tests` na `main`.*
 
 ---
 
