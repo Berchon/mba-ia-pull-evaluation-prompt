@@ -63,7 +63,26 @@ class TestPrompts:
 
     def test_prompt_has_few_shot_examples(self):
         """Verifica se o prompt contém exemplos de entrada/saída (técnica Few-shot)."""
-        pass
+        system_prompt = self.prompt_data.get("system_prompt", "")
+        has_few_shot_keyword = (
+            "few-shot" in system_prompt.lower()
+            or "exemplo" in system_prompt.lower()
+        )
+        assert has_few_shot_keyword, "O prompt não referencia exemplos ou a técnica Few-shot"
+
+        has_input_marker = (
+            "entrada" in system_prompt.lower()
+            or "bug report" in system_prompt.lower()
+        )
+        has_output_marker = (
+            "saída" in system_prompt.lower()
+            or "saida" in system_prompt.lower()
+        )
+        assert has_input_marker, "O prompt não contém marcadores claros de entrada para os exemplos"
+        assert has_output_marker, "O prompt não contém marcadores claros de saída para os exemplos"
+
+        example_count = system_prompt.lower().count("exemplo")
+        assert example_count >= 2, f"Few-shot requer múltiplos exemplos, encontrados apenas {example_count}"
 
     def test_prompt_no_todos(self):
         """Garante que você não esqueceu nenhum `[TODO]` no texto."""
