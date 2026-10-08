@@ -86,7 +86,14 @@ class TestPrompts:
 
     def test_prompt_no_todos(self):
         """Garante que você não esqueceu nenhum `[TODO]` no texto."""
-        pass
+        system_prompt = self.prompt_data.get("system_prompt", "")
+        assert "[TODO]" not in system_prompt, "O system_prompt contém marcador '[TODO]'"
+        assert "TODO" not in system_prompt, "O system_prompt contém a palavra 'TODO'"
+
+        for field, value in self.prompt_data.items():
+            if isinstance(value, str):
+                assert "[TODO]" not in value, f"O campo '{field}' contém marcador '[TODO]'"
+                assert "TODO" not in value, f"O campo '{field}' contém a palavra 'TODO'"
 
     def test_minimum_techniques(self):
         """Verifica (através dos metadados do yaml) se pelo menos 2 técnicas foram listadas."""
