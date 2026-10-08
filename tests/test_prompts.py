@@ -52,7 +52,14 @@ class TestPrompts:
 
     def test_prompt_mentions_format(self):
         """Verifica se o prompt exige formato Markdown ou User Story padrão."""
-        pass
+        system_prompt = self.prompt_data.get("system_prompt", "")
+        mentions_markdown = "markdown" in system_prompt.lower()
+        mentions_user_story = any(
+            term in system_prompt.lower()
+            for term in ["user story", "como um", "como uma", "como o sistema"]
+        )
+        assert mentions_markdown, "O prompt não exige explicitamente a saída em formato Markdown"
+        assert mentions_user_story, "O prompt não exige o formato canônico de User Story"
 
     def test_prompt_has_few_shot_examples(self):
         """Verifica se o prompt contém exemplos de entrada/saída (técnica Few-shot)."""
