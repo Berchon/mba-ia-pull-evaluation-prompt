@@ -36,7 +36,19 @@ class TestPrompts:
 
     def test_prompt_has_role_definition(self):
         """Verifica se o prompt define uma persona (ex: "Você é um Product Manager")."""
-        pass
+        system_prompt = self.prompt_data.get("system_prompt", "")
+        has_role_indicator = (
+            "você é um" in system_prompt.lower()
+            or "você é uma" in system_prompt.lower()
+            or "role prompting" in system_prompt.lower()
+        )
+        assert has_role_indicator, "O prompt não contém indicador de persona/papel ('Você é um...')"
+
+        has_persona = any(
+            role in system_prompt.lower()
+            for role in ["product manager", "qa lead", "tech pm"]
+        )
+        assert has_persona, "O prompt não define uma persona clara (ex: Product Manager, QA Lead)"
 
     def test_prompt_mentions_format(self):
         """Verifica se o prompt exige formato Markdown ou User Story padrão."""
