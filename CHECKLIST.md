@@ -102,7 +102,7 @@
 
 ### Tarefa 5.1: Implementação de `src/push_prompts.py`
 - **Branch:** `feature/task-5.1-push-prompts-script`
-- [ ] **Subtask 5.1.1:** Validar variáveis de ambiente obrigatórias (`LANGSMITH_API_KEY`, `USERNAME_LANGSMITH_HUB`).
+- [x] **Subtask 5.1.1:** Validar variáveis de ambiente obrigatórias (`LANGSMITH_API_KEY`, `USERNAME_LANGSMITH_HUB`).
 - [ ] **Subtask 5.1.2:** Implementar `validate_prompt()` com `validate_prompt_structure()`.
 - [ ] **Subtask 5.1.3:** Construir `ChatPromptTemplate` a partir do YAML otimizado.
 - [ ] **Subtask 5.1.4:** Implementar `push_prompt_to_langsmith()` público (`new_repo_is_public=True`) no padrão `{USERNAME_LANGSMITH_HUB}/bug_to_user_story_v2`.

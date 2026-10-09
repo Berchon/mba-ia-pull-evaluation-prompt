@@ -48,8 +48,13 @@ def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
 
 
 def main():
-    """Função principal"""
-    ...
+    """Função principal que orquestra o push do prompt."""
+    print_section_header("PUSH DE PROMPTS AO LANGSMITH HUB")
+
+    # Subtask 5.1.1: Validar variáveis de ambiente obrigatórias
+    if not check_env_vars(["LANGSMITH_API_KEY", "USERNAME_LANGSMITH_HUB"]):
+        return 1
+
 
 
 if __name__ == "__main__":
