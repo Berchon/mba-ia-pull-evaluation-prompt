@@ -113,7 +113,7 @@
 ### Tarefa 5.2: Execução do Push e Validação no Hub
 - **Branch:** `feature/task-5.2-validate-push-execution`
 - [x] **Subtask 5.2.1:** Executar `python src/push_prompts.py`.
-- [ ] **Subtask 5.2.2:** Confirmar publicação pública no LangSmith Hub.
+- [x] **Subtask 5.2.2:** Confirmar publicação pública no LangSmith Hub.
 - [ ] *Validação com o usuário realizada antes de cada commit.*
 - [ ] *Merge da branch `feature/task-5.2-validate-push-execution` na `main`.*
 
