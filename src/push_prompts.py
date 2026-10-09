@@ -25,13 +25,33 @@ def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
     Faz push do prompt otimizado para o LangSmith Hub (PÚBLICO).
 
     Args:
-        prompt_name: Nome do prompt
+        prompt_name: Nome do prompt (ex: 'usuario/bug_to_user_story_v2')
         prompt_data: Dados do prompt
 
     Returns:
         True se sucesso, False caso contrário
     """
-    ...
+    try:
+        inner_data = prompt_data.get("bug_to_user_story_v2", prompt_data)
+        prompt_template = build_chat_prompt_template(inner_data)
+        description = inner_data.get("description", "Prompt otimizado v2")
+        tags = inner_data.get("tags", [])
+
+        print(f"Enviando prompt para o LangSmith Hub: {prompt_name}...")
+        url = hub.push(
+            repo_full_name=prompt_name,
+            object=prompt_template,
+            new_repo_is_public=True,
+            new_repo_description=description,
+            tags=tags
+        )
+        print(f"✓ Push realizado com sucesso!")
+        print(f"🔗 URL no Hub: {url}")
+        return True
+    except Exception as e:
+        print(f"❌ Erro ao enviar prompt '{prompt_name}' ao LangSmith Hub: {e}")
+        return False
+
 
 
 def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
