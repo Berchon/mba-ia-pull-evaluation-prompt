@@ -107,8 +107,8 @@
 - [x] **Subtask 5.1.3:** Construir `ChatPromptTemplate` a partir do YAML otimizado.
 - [x] **Subtask 5.1.4:** Implementar `push_prompt_to_langsmith()` público (`new_repo_is_public=True`) no padrão `{USERNAME_LANGSMITH_HUB}/bug_to_user_story_v2`.
 - [x] **Subtask 5.1.5:** Implementar função `main()` com output visual e códigos de retorno.
-- [ ] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-5.1-push-prompts-script` na `main`.*
+- [x] *Validação com o usuário realizada antes de cada commit.*
+- [x] *Merge da branch `feature/task-5.1-push-prompts-script` na `main`.*
 
 ### Tarefa 5.2: Execução do Push e Validação no Hub
 - **Branch:** `feature/task-5.2-validate-push-execution`
