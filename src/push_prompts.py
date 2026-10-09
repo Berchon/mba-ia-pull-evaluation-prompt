@@ -15,7 +15,7 @@ import sys
 from dotenv import load_dotenv
 from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
-from utils import load_yaml, check_env_vars, print_section_header
+from utils import load_yaml, check_env_vars, print_section_header, validate_prompt_structure
 
 load_dotenv()
 
@@ -44,7 +44,13 @@ def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
     Returns:
         (is_valid, errors) - Tupla com status e lista de erros
     """
-    ...
+    # Trata tanto o formato desempacotado quanto empacotado sob o nome do prompt
+    if "bug_to_user_story_v2" in prompt_data:
+        prompt_data = prompt_data["bug_to_user_story_v2"]
+
+    return validate_prompt_structure(prompt_data)
+
+
 
 
 def main():
