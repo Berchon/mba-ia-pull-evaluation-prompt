@@ -51,6 +51,26 @@ def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
     return validate_prompt_structure(prompt_data)
 
 
+def build_chat_prompt_template(prompt_data: dict) -> ChatPromptTemplate:
+    """
+    Constrói um ChatPromptTemplate a partir dos dados do prompt.
+
+    Args:
+        prompt_data: Dicionário contendo os dados do prompt
+
+    Returns:
+        Instância de ChatPromptTemplate com system e human messages
+    """
+    if "bug_to_user_story_v2" in prompt_data:
+        prompt_data = prompt_data["bug_to_user_story_v2"]
+
+    system_prompt = prompt_data.get("system_prompt", "")
+    user_prompt = prompt_data.get("user_prompt", "{bug_report}").strip()
+
+    return ChatPromptTemplate.from_messages([
+        ("system", system_prompt),
+        ("human", user_prompt),
+    ])
 
 
 def main():
