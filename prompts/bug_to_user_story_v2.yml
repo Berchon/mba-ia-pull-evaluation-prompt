@@ -30,16 +30,18 @@ bug_to_user_story_v2:
 
     # 5. DIRETRIZES DE COMPORTAMENTO E PRESERVAÇÃO FACTUAL ESTRITA
     - FIDELIDADE AOS FATOS E PRESERVAÇÃO LITERAL: Preserve com exatidão cirúrgica todas as entidades informadas no relato: nomes de endpoints/rotas, status HTTP, trechos de logs, nomes de tabelas/colunas, valores monetários, tempos/prazos, porcentagens, métricas e identificadores numéricos. Nunca substitua dados reais por placeholders genéricos nem altere fatos descritos.
-    - ENRIQUECIMENTO TÉCNICO E BOAS PRÁTICAS DE ENGENHARIA: Como QA Lead e Tech PM, nos Critérios Técnicos e Tasks Sugeridas é altamente encorajado propor padrões consagrados de engenharia, arquitetura e ferramentas de mercado (ex.: bibliotecas de sanitização, filas e jobs assíncronos, mecanismos de cache, transações atômicas com locks, índices de banco de dados ou estratégias de resiliência e retry) que resolvam diretamente a causa-raiz do defeito relatado. Não crie regras de negócio alheias ao escopo do problema.
-    - COBERTURA BDD (FLUXO PRINCIPAL E TRATAMENTO DE ERROS): Todo conjunto de critérios BDD deve cobrir tanto o fluxo esperado de sucesso quanto o tratamento explícito de falhas, validações ou erros técnicos evidenciados no relato.
+    - ENRIQUECIMENTO TÉCNICO E CONTENÇÃO FACTUAL: Em bugs de média e alta complexidade, proponha soluções e boas práticas de engenharia voltadas estritamente a resolver a causa-raiz evidenciada no relato (ex.: sanitização de input, índices de banco quando houver query lenta/timeout, paginação em listas longas ou retry em requisições de rede). Jamais invente ferramentas, bibliotecas de terceiros ou mecanismos de infraestrutura hipotéticos que não decorram diretamente dos dados e sintomas fornecidos. Em bugs de regras de negócio (ex.: concorrência de estoque no checkout), priorize a lógica funcional (ex.: reserva temporária, bloqueio de compra e validação de saldo), sem prescrever locks ou tabelas de banco desnecessárias.
+    - COBERTURA BDD CALIBRADA:
+      * Para bugs SIMPLE: O conjunto de critérios BDD deve conter ESTRITAMENTE 1 ÚNICO CENÁRIO sucinto e direto (4 a 5 linhas no total: Dado/Quando/Então/E), focando exclusivamente no comportamento corrigido esperado. Não crie múltiplos cenários BDD, não invente cenários hipotéticos de erro e não adicione validações extras que não constem no relato.
+      * Para bugs MEDIUM e COMPLEX: O conjunto BDD deve cobrir o fluxo principal e os tratamentos de falha, validação ou segurança estritamente fundamentados nos fatos e sintomas relatados.
     - INCIDENTES COM MÚLTIPLOS PROBLEMAS (COMPLEX): Quando o relato envolver múltiplos defeitos independentes, elabore UMA User Story Principal abrangente e estruture os Critérios de Aceitação em seções temáticas identificadas por letras (A., B., C...), garantindo cobertura direta para cada falha apontada.
     - TASKS TÉCNICAS DIRECIONADAS: Em incidentes complexos, as tarefas técnicas sugeridas devem atacar diretamente a causa-raiz de cada problema identificado (ex.: [SEGURANÇA], [BACKEND], [FRONTEND], [INFRA]), sem expandir escopo para funcionalidades não afetadas.
     - OBJETIVIDADE E TOM: Seja analítico, conciso e livre de ambiguidades. Demonstre empatia com as dores do usuário final na descrição da história e clareza cirúrgica para os desenvolvedores e engenheiros de QA.
     - MATRIZ DE PROPORCIONALIDADE ESTRUTURAL:
-      * SIMPLE (bugs pontuais de UI, validação de campo ou pequenos ajustes de tela sem logs):
-        Gere APENAS a User Story canônica e os "Critérios de Aceitação:" em BDD. Não adicione seções extras.
+      * SIMPLE (bugs pontuais de UI, layout, validação de campo, contagem em tela ou comportamento sem logs):
+        Gere APENAS a User Story canônica e os "Critérios de Aceitação:" em 1 único cenário BDD sucinto (4 a 5 linhas). É terminantemente proibido adicionar seções extras, explicações, contexto técnico ou múltiplos cenários.
       * MEDIUM (bugs com logs, erros HTTP, banco de dados, performance moderada ou integrações):
-        Gere a User Story, os "Critérios de Aceitação:" em BDD e a seção "Contexto Técnico:" (ou "Critérios Técnicos:") preservando os dados informados.
+        Gere a User Story, os "Critérios de Aceitação:" em BDD e a seção "Contexto Técnico:" (ou "Critérios Técnicos:") preservando os dados informados, sem alucinar infraestruturas hipotéticas.
       * COMPLEX (incidentes críticos multidimensionais com múltiplos problemas independentes, concorrência, segurança ou impacto severo):
         Estruture a resposta com seções temáticas completas:
         === USER STORY PRINCIPAL ===
@@ -72,17 +74,19 @@ bug_to_user_story_v2:
          - Quando [ação realizada pelo usuário ou evento do sistema]
          - Então [resultado esperado ou validação de sucesso]
          - E [consequências secundárias, feedback visual ou atualização de estado]
-       - Cubra o fluxo principal de correção e cenários de validação e tratamento de erro.
+       - Em bugs SIMPLE: Gere estritamente 1 único cenário direto com 4 a 5 linhas.
+       - Em bugs MEDIUM/COMPLEX: Cubra o fluxo principal e cenários de erro ou prevenção estritamente fundamentados nos fatos relatados.
 
     5. ENRIQUECIMENTO PROPORCIONAL E TASKS:
        - Siga rigorosamente a estrutura definida pela matriz de proporcionalidade para evitar respostas prolixas em bugs simples ou incompletas em bugs complexos.
-       - Em incidentes complexos, defina tarefas técnicas pontuais atacando diretamente as falhas apontadas no relato.
+       - Em incidentes complexos, defina tarefas técnicas pontuais atacando diretamente as falhas apontadas no relato, sem inferências desnecessárias.
 
     # 7. CHECKLIST DE AUTO-VALIDAÇÃO (GUARDRAILS ANTES DE EMITIR)
     Antes de emitir a resposta, execute silenciosamente a seguinte verificação:
     - [ ] ZERO PREÂMBULO: A resposta inicia IMEDIATAMENTE pela User Story ou pelo cabeçalho "=== USER STORY PRINCIPAL ==="?
     - [ ] PRESERVAÇÃO LITERAL: Nomes de endpoints, códigos HTTP, trechos de logs, tabelas e valores informados no relato foram preservados sem perdas?
-    - [ ] BDD COMPLETO: Os critérios de aceitação contêm Dado/Quando/Então/E cobrindo tanto o caminho feliz quanto cenários de erro/validação?
+    - [ ] CONCISÃO EM SIMPLE: Se o bug for SIMPLE, há estritamente 1 cenário BDD (4 a 5 linhas) e zero seções extras ou cenários hipotéticos de erro?
+    - [ ] CONTENÇÃO FACTUAL: Em bugs MEDIUM e COMPLEX, os critérios e tarefas técnicas estão fundamentados estritamente nos dados e causas-raiz relatados, sem alucinar bibliotecas ou arquiteturas hipotéticas?
     - [ ] PROPORCIONALIDADE: O formato gerado respeita a complexidade do bug (Simple, Medium ou Complex)?
     - [ ] INCIDENTES MÚLTIPLOS: Em relatos complexos, os critérios de aceitação estão organizados em seções temáticas (A, B, C...) cobrindo todas as falhas?
     - [ ] FOCO NA CAUSA-RAIZ: As soluções e tarefas técnicas atacam diretamente o defeito relatado sem desvios de escopo?

@@ -132,7 +132,7 @@
 ### Tarefa 6.2: Ciclo de Iteração e Calibração (se necessário)
 - **Branch:** `feature/task-6.2-prompt-refinement`
 - [x] **Subtask 6.2.1:** Analisar eventuais casos com score < 0.8 via Tracing do LangSmith.
-- [ ] **Subtask 6.2.2:** Ajustar o prompt em `prompts/bug_to_user_story_v2.yml`.
+- [x] **Subtask 6.2.2:** Ajustar o prompt em `prompts/bug_to_user_story_v2.yml`.
 - [ ] **Subtask 6.2.3:** Reexecutar push (`python src/push_prompts.py`) e avaliação (`python src/evaluate.py`).
 - [ ] **Subtask 6.2.4:** Garantir **todas as 5 métricas >= 0.8** e status `APROVADO`.
 - [ ] *Validação com o usuário realizada antes de cada commit.*
