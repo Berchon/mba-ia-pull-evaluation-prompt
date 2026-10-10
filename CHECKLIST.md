@@ -124,10 +124,10 @@
 ### Tarefa 6.1: Execução da Avaliação com Gemini 2.5 Flash
 - **Branch:** `feature/task-6.1-evaluate-prompts`
 - [x] **Subtask 6.1.1:** Verificar sincronização dos 15 casos do dataset com o LangSmith.
-- [ ] **Subtask 6.1.2:** Executar `python src/evaluate.py`.
-- [ ] **Subtask 6.1.3:** Analisar notas das 5 métricas (Helpfulness, Correctness, F1-Score, Clarity, Precision).
-- [ ] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-6.1-evaluate-prompts` na `main`.*
+- [x] **Subtask 6.1.2:** Executar `python src/evaluate.py`.
+- [x] **Subtask 6.1.3:** Analisar notas das 5 métricas (Helpfulness, Correctness, F1-Score, Clarity, Precision).
+- [x] *Validação com o usuário realizada antes de cada commit.*
+- [x] *Merge da branch `feature/task-6.1-evaluate-prompts` na `main`.*
 
 ### Tarefa 6.2: Ciclo de Iteração e Calibração (se necessário)
 - **Branch:** `feature/task-6.2-prompt-refinement`
