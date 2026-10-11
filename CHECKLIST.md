@@ -144,7 +144,7 @@
 
 ### Tarefa 7.1: Redação do `README.md` Oficial da Entrega
 - **Branch:** `feature/task-7.1-official-readme`
-- [ ] **Subtask 7.1.1:** Criar novo `README.md` com cabeçalho e visão geral do projeto.
+- [x] **Subtask 7.1.1:** Criar novo `README.md` com cabeçalho e visão geral do projeto.
 - [ ] **Subtask 7.1.2:** Redigir **Seção A: Técnicas Aplicadas (Fase 2)** com justificativas e exemplos.
 - [ ] **Subtask 7.1.3:** Redigir **Seção B: Resultados Finais** com tabela comparativa v1 vs v2 e link público.
 - [ ] **Subtask 7.1.4:** Redigir **Seção C: Como Executar** com comandos e pré-requisitos completos.
