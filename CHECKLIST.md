@@ -29,7 +29,7 @@
 - **Branch:** `feature/task-1.2-env-configuration`
 - [x] **Subtask 1.2.1:** Criar `.env` a partir de `.env.example`.
 - [x] **Subtask 1.2.2:** Configurar credenciais do LangSmith (`LANGSMITH_TRACING`, `LANGSMITH_ENDPOINT`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT`, `USERNAME_LANGSMITH_HUB`).
-- [x] **Subtask 1.2.3:** Configurar credenciais do Google Gemini (`GOOGLE_API_KEY`, `LLM_PROVIDER=google`, `LLM_MODEL=gemini-2.5-flash`, `EVAL_MODEL=gemini-2.5-flash`).
+- [x] **Subtask 1.2.3:** Configurar credenciais do Google Gemini (`GOOGLE_API_KEY`, `LLM_PROVIDER=google`, `LLM_MODEL=gemini-3.5-flash-lite`, `EVAL_MODEL=gemini-3.5-flash-lite`).
 - [x] *Validação com o usuário realizada antes de cada commit.*
 - [x] *Merge da branch `feature/task-1.2-env-configuration` na `main`.*
 
@@ -121,7 +121,7 @@
 
 ## Fase 6: Avaliação Automática das 5 Métricas e Iteração
 
-### Tarefa 6.1: Execução da Avaliação com Gemini 2.5 Flash
+### Tarefa 6.1: Execução da Avaliação com gemini-3.5-flash-lite
 - **Branch:** `feature/task-6.1-evaluate-prompts`
 - [x] **Subtask 6.1.1:** Verificar sincronização dos 15 casos do dataset com o LangSmith.
 - [x] **Subtask 6.1.2:** Executar `python src/evaluate.py`.
@@ -146,7 +146,27 @@
 - **Branch:** `feature/task-7.1-official-readme`
 - [x] **Subtask 7.1.1:** Criar novo `README.md` com cabeçalho e visão geral do projeto.
 - [x] **Subtask 7.1.2:** Redigir **Seção A: Técnicas Aplicadas (Fase 2)** com justificativas e exemplos.
-- [ ] **Subtask 7.1.3:** Redigir **Seção B: Resultados Finais** com tabela comparativa v1 vs v2 e link público.
+- [ ] **Subtask 7.1.3:** Consolidar **Seção B: Resultados Finais** com dados reais, tabela e evidências.
+  - [x] **Subtask 7.1.3.1:** Executar avaliação comparativa de `v1` e `v2` com `gemini-3.1-flash-lite` no dataset de 15 casos.
+    - [x] **Subtask 7.1.3.1.1:** Confirmar configurações no `.env` (`LLM_MODEL=gemini-3.1-flash-lite`, `EVAL_MODEL=gemini-3.1-flash-lite`, credenciais do Gemini e LangSmith).
+    - [x] **Subtask 7.1.3.1.2:** Apontar temporariamente `evaluate.py` para avaliar o prompt `v1` (`leonanluppi/bug_to_user_story_v1`).
+    - [x] **Subtask 7.1.3.1.3:** Executar a avaliação da `v1` contra os 15 casos do dataset e registrar notas individuais e as notas médias. *(v1: Helpfulness: 0.88 | Correctness: 0.84 | F1: 0.83 | Clarity: 0.91 | Precision: 0.86 | Média: 0.8640)*
+    - [x] **Subtask 7.1.3.1.4:** Restaurar `evaluate.py` para avaliar o prompt `v2` (`joao-da-silva/bug_to_user_story_v2`).
+    - [x] **Subtask 7.1.3.1.5:** Executar a avaliação da `v2` contra os 15 casos e registrar as notas médias finais consolidadas. *(v2: Helpfulness: 0.92 | Correctness: 0.93 | F1: 0.95 | Clarity: 0.92 | Precision: 0.91 | Média: 0.9252)*
+  - [ ] **Subtask 7.1.3.2:** Atualizar a tabela comparativa e o texto da Seção B no `README.md`.
+    - [ ] **Subtask 7.1.3.2.1:** Atualizar a documentação no `README.md` substituindo a menção a `gemini-2.5-flash` por `gemini-3.1-flash-lite`.
+    - [ ] **Subtask 7.1.3.2.2:** Preencher a tabela comparativa da Seção B com os valores médios reais exatos obtidos nos 15 experimentos para v1 e v2.
+    - [ ] **Subtask 7.1.3.2.3:** Atualizar a análise técnica dos resultados e as variações percentuais ($\Delta$) reais entre v1 e v2.
+  - [ ] **Subtask 7.1.3.3:** Criar diretório `docs/images/` e registrar as 3 imagens reais de evidência.
+    - [ ] **Subtask 7.1.3.3.1:** Criar fisicamente o diretório `docs/images/`.
+    - [ ] **Subtask 7.1.3.3.2:** Obter e salvar a captura de tela da visão geral das métricas da avaliação (`langsmith_evaluation_results.png`).
+    - [ ] **Subtask 7.1.3.3.3:** Obter e salvar a captura de tela do dataset de avaliação com os 15 casos sincronizados (`langsmith_dataset_15_cases.png`).
+    - [ ] **Subtask 7.1.3.3.4:** Obter e salvar a captura de tela do tracing detalhado de execução (`langsmith_trace_detail.png`).
+    - [ ] **Subtask 7.1.3.3.5:** Validar a renderização correta de todas as imagens no `README.md`.
+  - [ ] **Subtask 7.1.3.4:** Validar e atualizar as URLs do LangSmith Hub (`joao-da-silva`) e do projeto.
+    - [ ] **Subtask 7.1.3.4.1:** Validar a URL pública do prompt v2 no LangSmith Hub para o usuário `joao-da-silva`.
+    - [ ] **Subtask 7.1.3.4.2:** Identificar a URL funcional do projeto/experimento com o workspace/organização correspondente no LangSmith.
+    - [ ] **Subtask 7.1.3.4.3:** Atualizar os links no `README.md` e testar a acessibilidade dos links.
 - [ ] **Subtask 7.1.4:** Redigir **Seção C: Como Executar** com comandos e pré-requisitos completos.
 - [ ] **Subtask 7.1.5:** Redigir **Seção D: Evidências no LangSmith** (checklist, screenshots e traces).
 - [ ] *Validação com o usuário realizada antes de cada commit.*
