@@ -152,3 +152,116 @@ Para assegurar estabilidade nas métricas de *Precision* e *Clarity*, foram esta
   - `COMPLEX`: Estruturação temática abrangente (`=== USER STORY PRINCIPAL ===`, `=== CRITÉRIOS DE ACEITAÇÃO ===` agrupados por frentes A., B., C..., critérios técnicos e tarefas sugeridas).
 - **Contenção Factual Estrita (Zero Hallucination):** Proibição categórica de inventar bibliotecas de terceiros (ex.: nomes de plugins ou bibliotecas inexistentes no relato) e preservação literal de entidades técnicas reais (queries, códigos de erro e valores numéricos).
 
+---
+
+## Seção B: Resultados Finais e Avaliação
+
+### 1. Parâmetros e Ambiente de Avaliação
+
+O processo de benchmarking e avaliação comparativa foi executado utilizando o script oficial `src/evaluate.py`, que conecta à plataforma **LangSmith**, recupera os prompts versionados no Prompt Hub e executa a suíte de testes contra o dataset de referência de 15 casos reais (`datasets/bug_to_user_story.jsonl`).
+
+- **Provedor de LLM:** Google Gemini (`LLM_PROVIDER=google`)
+- **Modelo Principal de Geração:** `gemini-3.1-flash-lite` (`temperature=0.0`)
+- **Modelo Avaliador (*LLM-as-a-Judge*):** `gemini-3.1-flash-lite` (`temperature=0.0`)
+- **Dataset de Avaliação:** `prompt-optimization-challenge-resolved-eval` (15 casos sincronizados com o LangSmith)
+- **Critério Oficial de Aprovação:** Conforme o `INSTRUCTIONS.md`, **todas as 5 métricas devem atingir $\ge 0.80$ (80%) em cada um dos 15 casos individuais e também nas médias consolidadas** (não apenas a média isolada).
+
+---
+
+### 2. Tabela Comparativa Consolidada (`v1` vs `v2`)
+
+Abaixo estão os resultados consolidados obtidos na execução dos 15 experimentos do dataset contra ambas as versões do prompt:
+
+| Métrica | Prompt `v1` (Original) | Prompt `v2` (Otimizado) | Variação Absoluta ($\Delta$) | Variação Percentual | Limiar Mínimo | Status Oficial `v2` |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Helpfulness** | 0.88 | **0.92** | +0.04 | +4.55% | $\ge 0.80$ | ✅ **APROVADO** |
+| **Correctness** | 0.84 | **0.93** | **+0.09** | **+10.71%** | $\ge 0.80$ | ✅ **APROVADO** |
+| **F1-Score** | 0.83 | **0.95** | **+0.12** | **+14.46%** | $\ge 0.80$ | ✅ **APROVADO** |
+| **Clarity** | 0.91 | **0.92** | +0.01 | +1.10% | $\ge 0.80$ | ✅ **APROVADO** |
+| **Precision** | 0.86 | **0.91** | **+0.05** | **+5.81%** | $\ge 0.80$ | ✅ **APROVADO** |
+| **MÉDIA GERAL** | **0.8640** | **0.9252** | **+0.0612** | **+7.08%** | $\ge 0.80$ | ✅ **100% APROVADO** |
+| **Casos Reprovados** | **7 de 15 (46.7%)** | **0 de 15 (0.0%)** | **-7 casos** | **-100%** | **0 casos** | ✅ **100% Consistente** |
+
+---
+
+### 3. Matrizes de Resultados Caso a Caso (15 Casos do Dataset)
+
+Para uma análise transparente e detalhada, apresentamos abaixo o comportamento de todas as 5 métricas (as 3 métricas base e as 2 métricas derivadas) para cada um dos 15 casos do dataset em ambas as versões.
+
+#### Tabela 3.1: Desempenho Caso a Caso — Prompt `v1` (Original)
+
+*Fórmulas: Helpfulness = (Clarity + Precision) / 2 | Correctness = (F1 + Precision) / 2*
+
+| Caso | Complexidade / Domínio | F1-Score (Base) | Clarity (Base) | Precision (Base) | Helpfulness (Derivada) | Correctness (Derivada) | Status do Caso |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **01** | `simple` / e-commerce | 0.72 ❌ | 0.75 ❌ | 0.83 | 0.79 ❌ | 0.78 ❌ | ❌ **Reprovado** |
+| **02** | `simple` / saas | 0.84 | 0.85 | 0.93 | 0.89 | 0.89 | ✅ Aprovado |
+| **03** | `simple` / mobile | 0.84 | 0.85 | 0.87 | 0.86 | 0.86 | ✅ Aprovado |
+| **04** | `simple` / saas | 0.72 ❌ | 0.90 | 0.83 | 0.87 | 0.78 ❌ | ❌ **Reprovado** |
+| **05** | `simple` / e-commerce | 0.79 ❌ | 0.95 | 0.83 | 0.89 | 0.81 | ❌ **Reprovado** |
+| **06** | `medium` / saas | 0.90 | 0.95 | 0.93 | 0.94 | 0.92 | ✅ Aprovado |
+| **07** | `medium` / erp | 0.95 | 0.95 | 0.97 | 0.96 | 0.96 | ✅ Aprovado |
+| **08** | `medium` / saas | 0.85 | 0.95 | 0.93 | 0.94 | 0.89 | ✅ Aprovado |
+| **09** | `medium` / crm | 0.65 ❌ | 0.95 | 0.83 | 0.89 | 0.74 ❌ | ❌ **Reprovado** |
+| **10** | `medium` / mobile | 0.79 ❌ | 0.90 | 0.83 | 0.87 | 0.81 | ❌ **Reprovado** |
+| **11** | `medium` / e-commerce | 0.87 | 0.90 | 0.73 ❌ | 0.82 | 0.80 | ❌ **Reprovado** |
+| **12** | `medium` / saas | 0.95 | 0.95 | 0.83 | 0.89 | 0.89 | ✅ Aprovado |
+| **13** | `complex` / e-commerce | 0.92 | 0.95 | 0.83 | 0.89 | 0.88 | ✅ Aprovado |
+| **14** | `complex` / saas | 0.87 | 0.95 | 0.83 | 0.89 | 0.85 | ✅ Aprovado |
+| **15** | `complex` / mobile+backend | 0.75 ❌ | 0.95 | 0.83 | 0.89 | 0.79 ❌ | ❌ **Reprovado** |
+| **MÉDIA** | — | **0.83** | **0.91** | **0.86** | **0.88** | **0.84** | ⚠️ **7 Casos Reprovados (46.7%)** |
+
+---
+
+#### Tabela 3.2: Desempenho Caso a Caso — Prompt `v2` (Otimizado)
+
+*Fórmulas: Helpfulness = (Clarity + Precision) / 2 | Correctness = (F1 + Precision) / 2*
+
+| Caso | Complexidade / Domínio | F1-Score (Base) | Clarity (Base) | Precision (Base) | Helpfulness (Derivada) | Correctness (Derivada) | Status do Caso |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **01** | `simple` / e-commerce | 0.90 | 0.85 | 0.83 | 0.84 | 0.87 | ✅ Aprovado |
+| **02** | `simple` / saas | 0.90 | 0.90 | 0.93 | 0.92 | 0.92 | ✅ Aprovado |
+| **03** | `simple` / mobile | 0.92 | 0.90 | 0.93 | 0.92 | 0.93 | ✅ Aprovado |
+| **04** | `simple` / saas | **1.00** | 0.95 | **0.97** | **0.96** | **0.99** | ✅ Aprovado *(Salto: v1 era 0.72)* |
+| **05** | `simple` / e-commerce | 0.92 | 0.95 | 0.93 | 0.94 | 0.93 | ✅ Aprovado *(v1 era 0.79)* |
+| **06** | `medium` / saas | 0.97 | 0.95 | 0.93 | 0.94 | 0.95 | ✅ Aprovado |
+| **07** | `medium` / erp | 0.92 | 0.85 | 0.93 | 0.89 | 0.93 | ✅ Aprovado |
+| **08** | `medium` / saas | 0.90 | 0.95 | 0.93 | 0.94 | 0.92 | ✅ Aprovado |
+| **09** | `medium` / crm | **1.00** | 0.95 | 0.93 | 0.94 | **0.97** | ✅ Aprovado *(Salto: v1 era 0.65)* |
+| **10** | `medium` / mobile | 0.90 | 0.95 | 0.83 | 0.89 | 0.87 | ✅ Aprovado *(v1 era 0.79)* |
+| **11** | `medium` / e-commerce | **1.00** | 0.85 | 0.93 | 0.89 | **0.97** | ✅ Aprovado *(v1 Precision era 0.73)* |
+| **12** | `medium` / saas | **1.00** | **1.00** | 0.93 | **0.97** | **0.97** | ✅ Aprovado *(Score perfeito)* |
+| **13** | `complex` / e-commerce | 0.97 | 0.90 | 0.93 | 0.92 | 0.95 | ✅ Aprovado |
+| **14** | `complex` / saas | 0.90 | 0.95 | 0.93 | 0.94 | 0.92 | ✅ Aprovado |
+| **15** | `complex` / mobile+backend | **1.00** | **0.90** | **0.83** | **0.87** | **0.92** | ✅ Aprovado *(Salto: v1 era 0.75)* |
+| **MÉDIA** | — | **0.95** | **0.92** | **0.91** | **0.92** | **0.93** | ✅ **100% Aprovado (15 de 15)** |
+
+---
+
+### 4. Análise Técnica e Qualitativa dos Ganhos
+
+1. **Aumento Expressivo de F1-Score (+14.46%) e Correctness (+10.71%):**
+   - No prompt `v1`, a falta de Few-shots e de diretrizes claras fazia o modelo oscilar bruscamente, resultando em quedas severas nos casos 1, 4, 5, 9, 10, 11 e 15.
+   - Com o *Chain of Thought* estruturado em BDD e os 9 exemplos *Few-shot*, o modelo passou a extrair todas as informações essenciais do relato sem omissões (*Recall* elevado) e sem inserir elementos estranhos (*Precision* elevada), fazendo o F1-Score médio subir de **0.83** para **0.95**.
+
+2. **Eliminação de 100% dos Casos Reprovados:**
+   - Enquanto o `v1` reprovou em **7 dos 15 casos (46.7%)**, o prompt `v2` obteve **taxa de sucesso de 100%**, com nota mínima individual de **0.83** em qualquer métrica base de qualquer caso.
+   - Destaque para o **Caso 9 (CRM - Business Logic)**, cujo F1 subiu de **0.65 para 1.00**, o **Caso 4 (SaaS)**, cujo F1 saltou de **0.72 para 1.00**, e o **Caso 15 (Mobile Sync Complex)**, cujo F1 saltou de **0.75 para 1.00**.
+
+3. **Contenção Factual e Precisão Técnica (+5.81%):**
+   - A diretriz explícita de "Zero Hallucination" e a proibição de bibliotecas externas não citadas impediram a alucinação de dependências hipotéticas.
+   - Em bugs complexos com múltiplas falhas simultâneas (Casos 13, 14 e 15), a estruturação em seções temáticas (`=== USER STORY PRINCIPAL ===`, `=== CRITÉRIOS DE ACEITAÇÃO ===`, `=== CRITÉRIOS TÉCNICOS ===`, `=== CONTEXTO DO BUG ===`, `=== TASKS TÉCNICAS SUGERIDAS ===`) permitiu manter a alta densidade técnica exigida por times de engenharia com clareza impecável.
+
+4. **Conformidade Rigorosa com os Requisitos Oficiais de Aprovação:**
+   - Conforme explicitado no arquivo `INSTRUCTIONS.md`:
+     > *"Critério de Aprovação: Helpfulness >= 0.8, Correctness >= 0.8, F1-Score >= 0.8, Clarity >= 0.8, Precision >= 0.8. MÉDIA das 5 métricas >= 0.8. IMPORTANTE: TODAS as 5 métricas devem estar >= 0.8, não apenas a média!"*
+   - O projeto superou integralmente este critério em sua interpretação mais estrita:
+     - **100% dos casos individuais (15 de 15)** registraram notas $\ge 0.83$ em todas as métricas base e derivadas, sem qualquer reprovação pontual.
+     - **Todas as 5 médias consolidadas** superaram expressivamente o limiar mínimo de 0.80 (80%):
+       - **Helpfulness:** **0.92** (meta: 0.80) — **+15.0% acima do limiar**
+       - **Correctness:** **0.93** (meta: 0.80) — **+16.25% acima do limiar**
+       - **F1-Score:** **0.95** (meta: 0.80) — **+18.75% acima do limiar**
+       - **Clarity:** **0.92** (meta: 0.80) — **+15.0% acima do limiar**
+       - **Precision:** **0.91** (meta: 0.80) — **+13.75% acima do limiar**
+       - **MÉDIA GERAL:** **0.9252** (meta: 0.80) — **+15.65% acima do limiar**
+

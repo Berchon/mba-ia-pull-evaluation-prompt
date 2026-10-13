@@ -153,10 +153,10 @@
     - [x] **Subtask 7.1.3.1.3:** Executar a avaliação da `v1` contra os 15 casos do dataset e registrar notas individuais e as notas médias. *(v1: Helpfulness: 0.88 | Correctness: 0.84 | F1: 0.83 | Clarity: 0.91 | Precision: 0.86 | Média: 0.8640)*
     - [x] **Subtask 7.1.3.1.4:** Restaurar `evaluate.py` para avaliar o prompt `v2` (`joao-da-silva/bug_to_user_story_v2`).
     - [x] **Subtask 7.1.3.1.5:** Executar a avaliação da `v2` contra os 15 casos e registrar as notas médias finais consolidadas. *(v2: Helpfulness: 0.92 | Correctness: 0.93 | F1: 0.95 | Clarity: 0.92 | Precision: 0.91 | Média: 0.9252)*
-  - [ ] **Subtask 7.1.3.2:** Atualizar a tabela comparativa e o texto da Seção B no `README.md`.
-    - [ ] **Subtask 7.1.3.2.1:** Atualizar a documentação no `README.md` substituindo a menção a `gemini-2.5-flash` por `gemini-3.1-flash-lite`.
-    - [ ] **Subtask 7.1.3.2.2:** Preencher a tabela comparativa da Seção B com os valores médios reais exatos obtidos nos 15 experimentos para v1 e v2.
-    - [ ] **Subtask 7.1.3.2.3:** Atualizar a análise técnica dos resultados e as variações percentuais ($\Delta$) reais entre v1 e v2.
+  - [x] **Subtask 7.1.3.2:** Atualizar a tabela comparativa e o texto da Seção B no `README.md`.
+    - [x] **Subtask 7.1.3.2.1:** Atualizar a documentação no `README.md` substituindo a menção a `gemini-2.5-flash` por `gemini-3.1-flash-lite`.
+    - [x] **Subtask 7.1.3.2.2:** Preencher a tabela comparativa da Seção B com os valores médios reais exatos obtidos nos 15 experimentos para v1 e v2.
+    - [x] **Subtask 7.1.3.2.3:** Atualizar a análise técnica dos resultados e as variações percentuais ($\Delta$) reais entre v1 e v2.
   - [ ] **Subtask 7.1.3.3:** Criar diretório `docs/images/` e registrar as 3 imagens reais de evidência.
     - [ ] **Subtask 7.1.3.3.1:** Criar fisicamente o diretório `docs/images/`.
     - [ ] **Subtask 7.1.3.3.2:** Obter e salvar a captura de tela da visão geral das métricas da avaliação (`langsmith_evaluation_results.png`).
