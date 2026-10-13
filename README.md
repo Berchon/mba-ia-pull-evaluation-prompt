@@ -265,6 +265,9 @@ Para uma análise transparente e detalhada, apresentamos abaixo o comportamento 
        - **Precision:** **0.91** (meta: 0.80) — **+13.75% acima do limiar**
        - **MÉDIA GERAL:** **0.9252** (meta: 0.80) — **+15.65% acima do limiar**
 
+5. **Determinismo e Reprodutibilidade Rigorosa (100% Consistente):**
+   - Graças à configuração com `temperature=0.0` e ao forte ancoramento estrutural proporcionado pelo *Few-Shot Learning*, reexecuções completas da suíte via `python3 src/evaluate.py` reproduzem com precisão matemática os mesmos resultados caso a caso e a média geral consolidada de **0.9252**, garantindo previsibilidade operacional em esteiras de CI/CD.
+
 ---
 
 ### 5. Análise de Tokens, Custo e FinOps (Trade-off de Engenharia)
@@ -294,7 +297,7 @@ As evidências abaixo foram capturadas diretamente da interface da plataforma La
 
 - **Prompt v2 no LangSmith Hub (Público):** [joao-da-silva/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2/05a390d2?organizationId=5244b291-325b-4700-9a57-445d2aa84b49)
 - **Dataset Oficial de Avaliação (15 Casos):** [prompt-optimization-challenge-resolved-eval](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/datasets/898bb6c9-da35-43ea-9fc0-4a8ce8b105d1)
-- **Projeto de Monitoramento e Tracing:** [prompt-optimization-challenge-resolved](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/a/prompt-optimization-challenge-resolved-69118272)
+- **Projeto de Monitoramento e Tracing:** [prompt-optimization-challenge-resolved](https://smith.langchain.com/projects/prompt-optimization-challenge-resolved) (Workspace: [prompt-optimization-challenge-resolved-69118272](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/a/prompt-optimization-challenge-resolved-69118272))
 
 ---
 
