@@ -146,7 +146,7 @@
 - **Branch:** `feature/task-7.1-official-readme`
 - [x] **Subtask 7.1.1:** Criar novo `README.md` com cabeçalho e visão geral do projeto.
 - [x] **Subtask 7.1.2:** Redigir **Seção A: Técnicas Aplicadas (Fase 2)** com justificativas e exemplos.
-- [ ] **Subtask 7.1.3:** Consolidar **Seção B: Resultados Finais** com dados reais, tabela e evidências.
+- [x] **Subtask 7.1.3:** Consolidar **Seção B: Resultados Finais** com dados reais, tabela e evidências.
   - [x] **Subtask 7.1.3.1:** Executar avaliação comparativa de `v1` e `v2` com `gemini-3.1-flash-lite` no dataset de 15 casos.
     - [x] **Subtask 7.1.3.1.1:** Confirmar configurações no `.env` (`LLM_MODEL=gemini-3.1-flash-lite`, `EVAL_MODEL=gemini-3.1-flash-lite`, credenciais do Gemini e LangSmith).
     - [x] **Subtask 7.1.3.1.2:** Apontar temporariamente `evaluate.py` para avaliar o prompt `v1` (`leonanluppi/bug_to_user_story_v1`).
@@ -157,16 +157,16 @@
     - [x] **Subtask 7.1.3.2.1:** Atualizar a documentação no `README.md` substituindo a menção a `gemini-2.5-flash` por `gemini-3.1-flash-lite`.
     - [x] **Subtask 7.1.3.2.2:** Preencher a tabela comparativa da Seção B com os valores médios reais exatos obtidos nos 15 experimentos para v1 e v2.
     - [x] **Subtask 7.1.3.2.3:** Atualizar a análise técnica dos resultados e as variações percentuais ($\Delta$) reais entre v1 e v2.
-  - [ ] **Subtask 7.1.3.3:** Criar diretório `docs/images/` e registrar as 3 imagens reais de evidência.
-    - [ ] **Subtask 7.1.3.3.1:** Criar fisicamente o diretório `docs/images/`.
-    - [ ] **Subtask 7.1.3.3.2:** Obter e salvar a captura de tela da visão geral das métricas da avaliação (`langsmith_evaluation_results.png`).
-    - [ ] **Subtask 7.1.3.3.3:** Obter e salvar a captura de tela do dataset de avaliação com os 15 casos sincronizados (`langsmith_dataset_15_cases.png`).
-    - [ ] **Subtask 7.1.3.3.4:** Obter e salvar a captura de tela do tracing detalhado de execução (`langsmith_trace_detail.png`).
-    - [ ] **Subtask 7.1.3.3.5:** Validar a renderização correta de todas as imagens no `README.md`.
-  - [ ] **Subtask 7.1.3.4:** Validar e atualizar as URLs do LangSmith Hub (`joao-da-silva`) e do projeto.
-    - [ ] **Subtask 7.1.3.4.1:** Validar a URL pública do prompt v2 no LangSmith Hub para o usuário `joao-da-silva`.
-    - [ ] **Subtask 7.1.3.4.2:** Identificar a URL funcional do projeto/experimento com o workspace/organização correspondente no LangSmith.
-    - [ ] **Subtask 7.1.3.4.3:** Atualizar os links no `README.md` e testar a acessibilidade dos links.
+  - [x] **Subtask 7.1.3.3:** Criar diretório `docs/images/` e registrar as imagens reais de evidência.
+    - [x] **Subtask 7.1.3.3.1:** Criar fisicamente o diretório `docs/images/`.
+    - [x] **Subtask 7.1.3.3.2:** Obter e salvar a captura de tela da visão geral operacional e FinOps v1 e v2 (`overview-v1.png`, `overview-v2.png`).
+    - [x] **Subtask 7.1.3.3.3:** Obter e salvar a captura de tela do dataset de avaliação com os 15 casos sincronizados (`dataset.png`).
+    - [x] **Subtask 7.1.3.3.4:** Obter e salvar a captura de tela do tracing detalhado de execução e evaluators (`trace-v1.png`, `trace-v2.png`) e do prompt v2 no Hub (`prompt-v2.png`).
+    - [x] **Subtask 7.1.3.3.5:** Validar a renderização correta de todas as imagens no `README.md`.
+  - [x] **Subtask 7.1.3.4:** Validar e atualizar as URLs do LangSmith Hub (`joao-da-silva`) e do projeto.
+    - [x] **Subtask 7.1.3.4.1:** Validar a URL pública do prompt v2 no LangSmith Hub para o usuário `joao-da-silva`.
+    - [x] **Subtask 7.1.3.4.2:** Identificar a URL funcional do projeto/experimento com o workspace/organização correspondente no LangSmith.
+    - [x] **Subtask 7.1.3.4.3:** Atualizar os links no `README.md` e testar a acessibilidade dos links.
 - [ ] **Subtask 7.1.4:** Redigir **Seção C: Como Executar** com comandos e pré-requisitos completos.
 - [ ] **Subtask 7.1.5:** Redigir **Seção D: Evidências no LangSmith** (checklist, screenshots e traces).
 - [ ] *Validação com o usuário realizada antes de cada commit.*

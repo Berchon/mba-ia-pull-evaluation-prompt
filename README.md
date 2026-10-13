@@ -265,3 +265,71 @@ Para uma análise transparente e detalhada, apresentamos abaixo o comportamento 
        - **Precision:** **0.91** (meta: 0.80) — **+13.75% acima do limiar**
        - **MÉDIA GERAL:** **0.9252** (meta: 0.80) — **+15.65% acima do limiar**
 
+---
+
+### 5. Análise de Tokens, Custo e FinOps (Trade-off de Engenharia)
+
+Além da acurácia e conformidade técnica, a engenharia de prompts em nível de produção exige uma avaliação rigorosa de **FinOps (custo financeiro) e consumo de tokens**.
+
+A comparação dos dashboards operacionais no LangSmith entre as duas baterias completas de testes (60 chamadas de API cada, sendo 15 gerações e 45 chamadas de avaliadores *LLM-as-a-Judge*) comprova um trade-off altamente favorável:
+
+| Dimensão Operacional | Prompt `v1` (Original) | Prompt `v2` (Otimizado) | Variação ($\Delta$) | Impacto de Engenharia |
+| :--- | :---: | :---: | :---: | :--- |
+| **Modelo Utilizado** | `gemini-3.1-flash-lite` | `gemini-3.1-flash-lite` | Paritário | Ambos os testes com `temperature=0.0` |
+| **Total de Chamadas (Calls)** | 60 chamadas | 60 chamadas | 0 | 15 gerações + 45 avaliações (3 por caso) |
+| **Taxa de Erro (Error Rate)** | **0%** | **0%** | 0% | 100% de estabilidade e resiliência de API |
+| **Consumo Total de Tokens** | 74.4K tokens | 188.6K tokens | +114.2K | Adição de Few-shots (3x3) e BDD estruturado |
+| **Custo Financeiro Total** | **$0.03** | **$0.05** | **+$0.02** | Acréscimo residual e desprezível em produção |
+| **Aprovação Individual dos Casos** | 53.3% (8 de 15) | **100% (15 de 15)** | **+46.7 p.p.** | Eliminação total de reprovações pontuais |
+
+> **Conclusão de FinOps:** O aumento no consumo de tokens no `v2` é uma consequência direta e planejada do enriquecimento de contexto (*Few-shot Learning* com 3 pares de exemplos detalhados e estruturação minuciosa em BDD). Por um acréscimo de custo de **apenas US$ 0.02 (dois centavos de dólar)**, o sistema elevou sua taxa de aprovação de **53.3% para 100%**, transformando uma solução inconsistente em um artefato pronto para uso em esteiras corporativas de software.
+
+---
+
+### 6. Galeria de Evidências Visuais e Links Oficiais do LangSmith
+
+As evidências abaixo foram capturadas diretamente da interface da plataforma LangSmith, comprovando a infraestrutura, publicação, rastreabilidade e métricas operacionais do projeto.
+
+#### 6.1. Links Oficiais do Projeto no LangSmith
+
+- **Prompt v2 no LangSmith Hub (Público):** [joao-da-silva/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2/05a390d2?organizationId=5244b291-325b-4700-9a57-445d2aa84b49)
+- **Dataset Oficial de Avaliação (15 Casos):** [prompt-optimization-challenge-resolved-eval](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/datasets/898bb6c9-da35-43ea-9fc0-4a8ce8b105d1)
+- **Projeto de Monitoramento e Tracing:** [prompt-optimization-challenge-resolved](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/a/prompt-optimization-challenge-resolved-69118272)
+
+---
+
+#### 6.2. Dataset de Avaliação (15 Casos Cadastrados)
+
+Visualização do dataset sincronizado no LangSmith contendo os 15 casos reais de teste (simples, médios e complexos) com os respectivos inputs e saídas de referência:
+
+![Dataset de Avaliação no LangSmith](docs/images/dataset.png)
+
+---
+
+#### 6.3. Publicação do Prompt v2 no LangSmith Hub
+
+Registro público do prompt otimizado no Hub com metadados, tags (`bdd`, `few-shot`, `bug-to-story`, `qa`), commit `05a390d2` e variáveis parametrizadas:
+
+![Prompt v2 no LangSmith Hub](docs/images/prompt-v2.png)
+
+---
+
+#### 6.4. Métricas de Execução e FinOps: Baseline `v1` vs Otimizado `v2`
+
+Comparativo de painéis operacionais demonstrando o uso estrito do `gemini-3.1-flash-lite`, taxa de erro de 0% e a análise volumétrica de tokens e custos:
+
+| Visão Geral Operacional: Prompt `v1` (74.4K tokens / $0.03) | Visão Geral Operacional: Prompt `v2` (188.6K tokens / $0.05) |
+| :---: | :---: |
+| ![Overview do Prompt v1](docs/images/overview-v1.png) | ![Overview do Prompt v2](docs/images/overview-v2.png) |
+
+---
+
+#### 6.5. Tracing Detalhado dos Avaliadores (LLM-as-a-Judge)
+
+Comparação das execuções na aba de Tracing, demonstrando as notas e avaliações atribuídas caso a caso:
+
+| Tracing de Avaliação: Prompt `v1` (Notas oscilantes e reprovações) | Tracing de Avaliação: Prompt `v2` (Notas altas $\ge 0.90$ e 100% sucesso) |
+| :---: | :---: |
+| ![Tracing do Prompt v1](docs/images/trace-v1.png) | ![Tracing do Prompt v2](docs/images/trace-v2.png) |
+
+
