@@ -177,4 +177,4 @@
 - [x] **Subtask 7.2.1:** Executar `pytest tests/test_prompts.py` e validar aprovação de 100%.
 - [x] **Subtask 7.2.2:** Validar `git status` (confirmar que `.env` está protegido no `.gitignore`, `PLANO_DESAFIO.md` e `CHECKLIST.md` estão rastreados no Git e árvore limpa).
 - [x] *Validação com o usuário realizada antes de cada commit.*
-- [ ] *Merge da branch `feature/task-7.2-final-verification` na `main`.*
+- [x] *Merge da branch `feature/task-7.2-final-verification` na `main`.*
