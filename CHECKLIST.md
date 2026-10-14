@@ -167,7 +167,7 @@
     - [x] **Subtask 7.1.3.4.1:** Validar a URL pública do prompt v2 no LangSmith Hub para o usuário `joao-da-silva`.
     - [x] **Subtask 7.1.3.4.2:** Identificar a URL funcional do projeto/experimento com o workspace/organização correspondente no LangSmith.
     - [x] **Subtask 7.1.3.4.3:** Atualizar os links no `README.md` e testar a acessibilidade dos links.
-- [ ] **Subtask 7.1.4:** Redigir **Seção C: Como Executar** com comandos e pré-requisitos completos.
+- [x] **Subtask 7.1.4:** Redigir **Seção C: Como Executar** com comandos e pré-requisitos completos.
 - [ ] **Subtask 7.1.5:** Redigir **Seção D: Evidências no LangSmith** (checklist, screenshots e traces).
 - [ ] *Validação com o usuário realizada antes de cada commit.*
 - [ ] *Merge da branch `feature/task-7.1-official-readme` na `main`.*
