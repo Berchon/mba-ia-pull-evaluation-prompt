@@ -175,6 +175,6 @@
 ### Tarefa 7.2: Verificação Final e Garantia de Qualidade
 - **Branch:** `feature/task-7.2-final-verification`
 - [x] **Subtask 7.2.1:** Executar `pytest tests/test_prompts.py` e validar aprovação de 100%.
-- [ ] **Subtask 7.2.2:** Validar `git status` (confirmar que `.env` está protegido no `.gitignore`, `PLANO_DESAFIO.md` e `CHECKLIST.md` estão rastreados no Git e árvore limpa).
-- [ ] *Validação com o usuário realizada antes de cada commit.*
+- [x] **Subtask 7.2.2:** Validar `git status` (confirmar que `.env` está protegido no `.gitignore`, `PLANO_DESAFIO.md` e `CHECKLIST.md` estão rastreados no Git e árvore limpa).
+- [x] *Validação com o usuário realizada antes de cada commit.*
 - [ ] *Merge da branch `feature/task-7.2-final-verification` na `main`.*
