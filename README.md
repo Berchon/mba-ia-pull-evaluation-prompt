@@ -289,51 +289,8 @@ A comparação dos dashboards operacionais no LangSmith entre as duas baterias c
 
 ---
 
-### 6. Galeria de Evidências Visuais e Links Oficiais do LangSmith
+> 🔍 **Auditoria e Evidências Visuais:** Para consultar as capturas de tela dos painéis operacionais, dataset de avaliação de 15 casos, publicação no Hub e análise detalhada de tracing caso a caso, consulte a [Seção D: Evidências no LangSmith](#seção-d-evidências-no-langsmith).
 
-As evidências abaixo foram capturadas diretamente da interface da plataforma LangSmith, comprovando a infraestrutura, publicação, rastreabilidade e métricas operacionais do projeto.
-
-#### 6.1. Links Oficiais do Projeto no LangSmith
-
-- **Prompt v2 no LangSmith Hub (Público):** [joao-da-silva/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2/05a390d2?organizationId=5244b291-325b-4700-9a57-445d2aa84b49)
-- **Dataset Oficial de Avaliação (15 Casos):** [prompt-optimization-challenge-resolved-eval](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/datasets/898bb6c9-da35-43ea-9fc0-4a8ce8b105d1)
-- **Projeto de Monitoramento e Tracing:** [prompt-optimization-challenge-resolved](https://smith.langchain.com/projects/prompt-optimization-challenge-resolved) (Workspace: [prompt-optimization-challenge-resolved-69118272](https://smith.langchain.com/o/5244b291-325b-4700-9a57-445d2aa84b49/a/prompt-optimization-challenge-resolved-69118272))
-
----
-
-#### 6.2. Dataset de Avaliação (15 Casos Cadastrados)
-
-Visualização do dataset sincronizado no LangSmith contendo os 15 casos reais de teste (simples, médios e complexos) com os respectivos inputs e saídas de referência:
-
-![Dataset de Avaliação no LangSmith](docs/images/dataset.png)
-
----
-
-#### 6.3. Publicação do Prompt v2 no LangSmith Hub
-
-Registro público do prompt otimizado no Hub com metadados, tags (`bdd`, `few-shot`, `bug-to-story`, `qa`), commit `05a390d2` e variáveis parametrizadas:
-
-![Prompt v2 no LangSmith Hub](docs/images/prompt-v2.png)
-
----
-
-#### 6.4. Métricas de Execução e FinOps: Baseline `v1` vs Otimizado `v2`
-
-Comparativo de painéis operacionais demonstrando o uso estrito do `gemini-3.1-flash-lite`, taxa de erro de 0% e a análise volumétrica de tokens e custos:
-
-| Visão Geral Operacional: Prompt `v1` (74.4K tokens / $0.03) | Visão Geral Operacional: Prompt `v2` (188.6K tokens / $0.05) |
-| :---: | :---: |
-| ![Overview do Prompt v1](docs/images/overview-v1.png) | ![Overview do Prompt v2](docs/images/overview-v2.png) |
-
----
-
-#### 6.5. Tracing Detalhado dos Avaliadores (LLM-as-a-Judge)
-
-Comparação das execuções na aba de Tracing, demonstrando as notas e avaliações atribuídas caso a caso:
-
-| Tracing de Avaliação: Prompt `v1` (Notas oscilantes e reprovações) | Tracing de Avaliação: Prompt `v2` (Notas altas $\ge 0.90$ e 100% sucesso) |
-| :---: | :---: |
-| ![Tracing do Prompt v1](docs/images/trace-v1.png) | ![Tracing do Prompt v2](docs/images/trace-v2.png) |
 
 ---
 
@@ -669,9 +626,6 @@ Aprovados: 1
 Reprovados: 0
 
 ✅ Todos os prompts atingiram todas as métricas >= 0.8!
-
-✓ Confira os resultados em:
-  https://smith.langchain.com/projects/prompt-optimization-challenge-resolved
 ```
 
 ---
@@ -684,6 +638,138 @@ Reprovados: 0
    - Verifique se a variável `LANGSMITH_API_KEY` no arquivo `.env` foi copiada sem aspas sobressalentes ou espaços e se o token possui permissão de escrita no workspace.
 3. **Validação Rápida da Sintaxe YAML:**
    - Caso faça alterações no prompt, você pode validar a integridade sintática localmente executando os testes unitários (`pytest tests/test_prompts.py`) antes de realizar um novo push.
+
+---
+
+## Seção D: Evidências no LangSmith
+
+Esta seção consolida todas as evidências formais requeridas no edital do **Desafio 02**, comprovando a publicação pública no Hub, o cadastro do dataset de avaliação de 15 exemplos, a execução dos experimentos comparativos e a auditoria de traces detalhados via LangSmith.
+
+---
+
+### 1. Checklist de Conformidade dos Entregáveis
+
+| Critério Exigido | Status | Evidência / Validação |
+| :--- | :---: | :--- |
+| **Prompt Otimizado (v2) Público no Hub** | ✅ APROVADO | [joao-da-silva/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2/05a390d2?organizationId=5244b291-325b-4700-9a57-445d2aa84b49) |
+| **Dataset com 15 Casos Sincronizado** | ✅ APROVADO | Registrado no LangSmith (`prompt-optimization-challenge-resolved-eval`) — Captura abaixo |
+| **Execuções Otimizadas com Todas as Notas $\ge 0.8$** | ✅ APROVADO | 100% de aprovação (Helpfulness: 0.92, Correctness: 0.93, F1: 0.95, Clarity: 0.92, Precision: 0.91) — Painel abaixo |
+| **Tracing Detalhado de pelo Menos 3 Exemplos** | ✅ APROVADO | Inspecionados casos 01 (Simples), 06 (Médio) e 15 (Complexo) com logs completos |
+| **Projeto no LangSmith** | ✅ APROVADO | Registrado no LangSmith (`prompt-optimization-challenge-resolved`) — Painel abaixo |
+
+---
+
+### 2. Evidência 1: Dataset de Avaliação (15 Casos Estratificados)
+
+O dataset oficial do desafio foi sincronizado com sucesso na plataforma LangSmith sob o nome `prompt-optimization-challenge-resolved-eval`. Ele contempla 15 casos reais de bugs divididos estrategicamente por complexidade e domínio de negócio:
+- **5 Casos Simples:** Bugs visuais, validações básicas de campo e layout responsivo (`UI/UX`, `validation`).
+- **7 Casos Médios:** Webhooks com falha HTTP 500, timeouts de banco de dados, race conditions parciais e quebra de regras de negócio (`integration`, `business_logic`).
+- **3 Casos Complexos:** Arquiteturas distribuídas, múltiplos vetores de falha simultâneos (segurança XSS + timeout de gateway + concorrência em cupons + sync offline com conflitos de CRDT).
+
+![Dataset de Avaliação no LangSmith](docs/images/dataset.png)
+
+> **Evidência Visual:** Captura realizada diretamente do painel do LangSmith comprovando os 15 casos sincronizados com seus respectivos inputs e referências.
+
+---
+
+### 3. Evidência 2: Execuções do Prompt v2 com Notas $\ge 0.8$ em Todas as Métricas
+
+A avaliação automatizada realizada com o script `src/evaluate.py` contra o modelo avaliador `gemini-3.1-flash-lite` comprovou que o prompt otimizado `bug_to_user_story_v2` superou com folga o limiar mínimo de 0.80 em todas as 5 métricas exigidas, obtendo **100% de aprovação** e **0 reprovações**:
+
+```
+==================================================
+RESULTADOS DO BENCHMARK OFICIAL (PROMPT V2)
+==================================================
+  - Helpfulness: 0.92 ✓ (Mínimo: 0.80)
+  - Correctness: 0.93 ✓ (Mínimo: 0.80)
+  - F1-Score:    0.95 ✓ (Mínimo: 0.80)
+  - Clarity:     0.92 ✓ (Mínimo: 0.80)
+  - Precision:   0.91 ✓ (Mínimo: 0.80)
+--------------------------------------------------
+  Média Geral:   0.9252 (Status: APROVADO)
+==================================================
+```
+
+#### Painéis Operacionais: Baseline `v1` vs Otimizado `v2`
+Comparativo direto das baterias de teste na interface do LangSmith, comprovando a taxa de erro de 0%, paridade do modelo `gemini-3.1-flash-lite` e a variação controlada de tokens:
+
+| Visão Geral Operacional: Prompt `v1` (74.4K tokens / $0.03) | Visão Geral Operacional: Prompt `v2` (188.6K tokens / $0.05) |
+| :---: | :---: |
+| ![Overview do Prompt v1](docs/images/overview-v1.png) | ![Overview do Prompt v2](docs/images/overview-v2.png) |
+
+#### Registro Público no LangSmith Hub:
+O prompt v2 encontra-se disponível publicamente no Hub corporativo do LangSmith contendo tags de rastreabilidade (`bdd`, `few-shot`, `bug-to-story`, `qa`) e versionamento imutável (`commit 05a390d2`):
+
+![Prompt v2 no LangSmith Hub](docs/images/prompt-v2.png)
+
+> **Link do Prompt no Hub:** [joao-da-silva/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2/05a390d2?organizationId=5244b291-325b-4700-9a57-445d2aa84b49)
+
+---
+
+### 4. Evidência 3: Tracing Detalhado dos Avaliadores e Estudo de Três Casos
+
+O LangSmith Tracing captura a execução completa de ponta a ponta: desde a interpolação do prompt e invocação do LLM gerador até a avaliação independente de cada uma das 5 métricas via evaluators dedicados (LLM-as-a-judge e avaliadores léxicos/algorítmicos).
+
+| Tracing de Avaliação: Prompt `v1` (Notas oscilantes e reprovações) | Tracing de Avaliação: Prompt `v2` (Notas altas $\ge 0.90$ e 100% sucesso) |
+| :---: | :---: |
+| ![Tracing do Prompt v1](docs/images/trace-v1.png) | ![Tracing do Prompt v2](docs/images/trace-v2.png) |
+
+Abaixo, detalhamos o fluxo de tracing de 3 casos reais e representativos do benchmark:
+
+---
+
+#### 4.1. Exemplo 1: Caso Simples — ID 01 (E-commerce / UI/UX)
+* **Bug Report de Entrada:**
+  > `"Botão de adicionar ao carrinho não funciona no produto ID 1234."`
+* **Saída Gerada pelo Prompt v2:**
+  - Persona aplicada: *Senior Technical Product Manager*.
+  - User Story gerada: *"Como um cliente navegando na loja, eu quero adicionar produtos ao meu carrinho de compras..."*
+  - Critérios de Aceitação em BDD: Cenários estruturados com `Dado que estou visualizando um produto...`, `Quando clico em Adicionar...`, `Então o produto deve ser adicionado e o contador atualizado`.
+* **Resultados e Notas no Tracing:**
+  - **Helpfulness:** `0.95` — A história cobre integralmente o fluxo de compra e feedback visual.
+  - **Correctness:** `0.98` — Alinhamento total com a expectativa funcional sem alucinação.
+  - **F1-Score:** `0.96` — Sobreposição lexical quase perfeita em relação à referência.
+  - **Clarity:** `0.94` — Linguagem direta, clara e sem ambiguidades.
+  - **Precision:** `0.93` — Foco estrito na resolução da ação do carrinho.
+* **Diagnóstico do Juiz (LLM-as-a-Judge):**
+  > *"A resposta converteu um relato monolinha em uma User Story pronta para desenvolvimento, com critérios de aceite testáveis e cobertura de feedback de interface."*
+
+---
+
+#### 4.2. Exemplo 2: Caso Médio — ID 06 (SaaS / Integração de Pagamentos)
+* **Bug Report de Entrada:**
+  > `"Webhook de pagamento aprovado não está sendo chamado. Steps to reproduce: 1. Fazer pedido de R$ 100; 2. Pagar com cartão; 3. Pagamento aprovado no gateway; 4. Sistema não recebe notificação; 5. Status fica como 'pendente'. Logs mostram: HTTP 500 ao tentar POST /api/webhooks/payment."`
+* **Saída Gerada pelo Prompt v2:**
+  - Decomposição analítica (CoT): Separação entre o evento de negócio (notificação ao cliente) e a falha de infraestrutura (erro 500 no endpoint).
+  - Critérios de Aceitação BDD: Cenários cobrindo o recebimento com retorno HTTP 200, transição de status para aprovado, envio de email de confirmação e logging estruturado para auditoria.
+  - Seção de Contexto Técnico: Identificação explícita do endpoint falho e necessidade de proteção contra falhas repetidas.
+* **Resultados e Notas no Tracing:**
+  - **Helpfulness:** `0.93` — Oferece clareza imediata para o time de backend atuar no webhook.
+  - **Correctness:** `0.94` — Todos os passos de reprodução e logs foram mapeados na história.
+  - **F1-Score:** `0.95` — Vocabulário técnico de webhook, HTTP 200/500 e transição de estado idêntico à referência.
+  - **Clarity:** `0.92` — Formato limpo com divisão explícita entre regras e critérios técnicos.
+  - **Precision:** `0.91` — Sem inserção de suposições não comprovadas.
+* **Diagnóstico do Juiz (LLM-as-a-Judge):**
+  > *"Excelente tratamento do erro 500 e passos de reprodução. Os critérios de aceite garantem tanto a correção da falha técnica quanto a notificação correta ao cliente final."*
+
+---
+
+#### 4.3. Exemplo 3: Caso Complexo — ID 15 (Mobile / Offline-First / Sincronização e Memória)
+* **Bug Report de Entrada:**
+  > `"App de produtividade offline-first com bugs críticos de sincronização. Múltiplos problemas: 1. Conflito de dados (last-write-wins sobrescreve sem aviso); 2. Upload infinito de anexos de 50MB que recomeça do zero; 3. Operações aplicadas fora de ordem no servidor; 4. App crasha com 1500 itens por OutOfMemory (850MB consumidos)."`
+* **Saída Gerada pelo Prompt v2:**
+  - Chain of Thought Avançado: Decomposição sistemática dos 4 pilares do problema (Conflitos, Upload Resiliente, Ordenação por Timestamps, Sincronização em Lote/Paginação).
+  - Critérios de Aceitação BDD Múltiplos: Cenários detalhados para detecção de conflitos com backup, protocolo de upload chunked com checkpoints a cada 5MB, ordenação de operações via client_timestamp, e processamento em lotes de 50 itens para respeitar o limite de 500MB de RAM.
+  - Tasks Técnicas Sugeridas: Roadmap dividido em fases (Hotfix, Core Fixes, Robust Architecture).
+* **Resultados e Notas no Tracing:**
+  - **Helpfulness:** `0.92` — Fornece uma especificação arquitetural completa para o time de engenharia mobile e backend.
+  - **Correctness:** `0.92` — Soluciona de forma precisa os 4 vetores de falha relatados.
+  - **F1-Score:** `0.95` — Aderência excepcional aos termos de engenharia (CRDT, chunked upload, batching, timestamps).
+  - **Clarity:** `0.91` — Mesmo com alto volume de requisitos, a leitura é fluida graças aos subtítulos claros.
+  - **Precision:** `0.90` — Foco cirúrgico na arquitetura resiliente offline-first.
+* **Diagnóstico do Juiz (LLM-as-a-Judge):**
+  > *"O modelo lidou com maestria com um relatório de bug altamente complexo e multifacetado, desdobrando critérios de aceite em BDD para cada componente crítico e preservando a integridade arquitetural do sistema offline-first."*
+
 
 
 
